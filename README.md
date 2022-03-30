@@ -37,7 +37,7 @@ For previous tag 4;
 
 When run, this container will make whatever directory is specified by the environment variable SHARED_DIRECTORY available to NFS v4 clients.
 
-`docker run -d --name nfs --privileged -v /some/where/fileshare:/nfsshare -e SHARED_DIRECTORY=/nfsshare itsthenetwork/nfs-server-alpine:latest`
+`docker run -d --name nfs --privileged -v /some/where/fileshare:/nfsshare -e SHARED_DIRECTORY=/nfsshare lianshufeng/nfs`
 
 Add `--net=host` or `-p 2049:2049` to make the shares externally accessible via the host networking stack. This isn't necessary if using [Rancher](https://rancher.com/) or linking containers in some other way.
 
@@ -53,7 +53,7 @@ Due to the `fsid=0` parameter set in the **/etc/exports file**, there's no need 
 
 To be a little more explicit:
 
-`sudo mount -v -o vers=4,loud 10.11.12.101:/ /some/where/here`
+`sudo mount -v -o vers=4,loud 10.0.0.7:/ /mnt/share`
 
 To _unmount_:
 
