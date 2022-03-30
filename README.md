@@ -185,5 +185,22 @@ sudo mount -v 10.11.12.101:/ /mnt/one
 sudo mount -v 10.11.12.101:/another /mnt/two
 ```
 
-You might want to make the root share read only, or even make it inaccessible, to encourage users to only mount the correct, more specific shares directly. To do so you'll need to modify the exports file so the root share doesn't get configured based on the values assigned to the PERMITTED or SYNC environment variables.
+docker-compose
 
+- docker-compose.yml
+````shell
+version: "3"
+
+services:
+  springboot:
+    image: lianshufeng/nfs
+    privileged: true
+    ports:
+      - "2049:2049"
+    volumes:
+      - "./share:/nfsshare"
+    container_name: nfs
+    restart: always
+    environment:
+      - SHARED_DIRECTORY=/nfsshare
+````
